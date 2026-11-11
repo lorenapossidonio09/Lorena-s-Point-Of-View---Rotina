@@ -1,0 +1,297 @@
+/* =========================================================
+   ESTILOS GERAIS & VARIÁVEIS (Tons de Rosa em Degradê)
+========================================================= */
+:root {
+  --pink-light: #ffb6c1;   /* Rosa claro pastel */
+  --pink-mid: #ff69b4;     /* Rosa vibrante / Hot Pink */
+  --pink-dark: #8b004f;    /* Rosa escuro / Vinho rosado */
+  --bg-dark: #0f051d;      /* Fundo dark para contraste 3D */
+  --text-color: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-color);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  perspective: 1000px;
+}
+
+/* =========================================================
+   ELEMENTOS 3D DE FUNDO (Objetos em 3D Voando / Glitter / Estrelas)
+========================================================= */
+.bg-3d-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.floating-obj {
+  position: absolute;
+  background: linear-gradient(135deg, var(--pink-light), var(--pink-mid));
+  opacity: 0.7;
+  filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.8));
+  animation: float3D linear infinite;
+  transform-style: preserve-3d;
+}
+
+/* Formato Estrela */
+.star {
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+/* Formato Glitter (Diamante 3D) */
+.glitter {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  border-radius: 2px;
+}
+
+@keyframes float3D {
+  0% {
+    transform: translateY(100vh) translateZ(-200px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-20vh) translateZ(300px) rotateX(360deg) rotateY(360deg) rotateZ(720deg);
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   LAYOUT & CABEÇALHO (Visuais em Degradê 3D)
+========================================================= */
+.wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--pink-light), var(--pink-mid), var(--pink-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--pink-light);
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+
+/* =========================================================
+   GRID & CARDS COM EFEITO GLASSMORPHISM & 3D HOVER
+========================================================= */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  perspective: 1000px;
+}
+
+.card {
+  background: linear-gradient(145deg, rgba(255, 182, 193, 0.15), rgba(139, 0, 79, 0.25));
+  border: 1px solid rgba(255, 182, 193, 0.3);
+  border-radius: 20px;
+  padding: 30px 20px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+.card:hover {
+  transform: translateY(-12px) rotateX(6deg) rotateY(-4deg) scale(1.02);
+  border-color: var(--pink-mid);
+  box-shadow: 0 25px 45px rgba(255, 105, 180, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.card-glass {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  text-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
+}
+
+.card h2 {
+  font-size: 1.8rem;
+  color: var(--pink-light);
+  margin-bottom: 12px;
+}
+
+.card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #e0e0e0;
+  margin-bottom: 25px;
+  flex-grow: 1;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-detail {
+  font-size: 0.85rem;
+  color: var(--pink-light);
+  text-decoration: underline;
+}
+
+.btn-link {
+  font-size: 0.85rem;
+  background: linear-gradient(90deg, var(--pink-mid), var(--pink-dark));
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.btn-link:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   ESTILOS DO MODAL
+========================================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 5, 29, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #1f0a2a, #3b092b);
+  border: 1px solid var(--pink-mid);
+  width: 90%;
+  max-width: 500px;
+  border-radius: 20px;
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(255, 105, 180, 0.3);
+  transform: translateY(30px) scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0) scale(1);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 2rem;
+  color: var(--pink-light);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: var(--pink-mid);
+}
+
+.modal-content h2 {
+  color: var(--pink-light);
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  border-bottom: 1px solid rgba(255, 182, 193, 0.2);
+  padding-bottom: 10px;
+}
+
+.modal-content ul {
+  list-style: none;
+  margin-bottom: 25px;
+}
+
+.modal-content li {
+  margin-bottom: 12px;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #f0f0f0;
+}
+
+.modal-content strong {
+  color: var(--pink-light);
+}
+
+.modal-footer {
+  text-align: right;
+}
+
+.btn-main {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--pink-mid), var(--pink-dark));
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-main:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+}

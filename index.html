@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lorena's point of view</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Elementos 3D de fundo (Glitter e Estrelas) -->
+  <div class="bg-3d-container" id="bgContainer"></div>
+
+  <div class="wrapper">
+    <header class="header">
+      <h1 class="title">Lorena's point of view</h1>
+      <p class="subtitle">Organizador Pessoal de Rotinas & Prioridades</p>
+    </header>
+
+    <main class="grid-container">
+      
+      <!-- Card Estudo -->
+      <div class="card" onclick="openModal('estudo')">
+        <div class="card-glass">
+          <div class="card-icon">📚</div>
+          <h2>Estudo</h2>
+          <p>Organização de horários, matérias, leituras e foco contínuo.</p>
+          <div class="card-actions">
+            <span class="btn-detail">Ver Resumo</span>
+            <a href="estudo.html" class="btn-link" onclick="event.stopPropagation()">Acessar Página ➔</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Trabalho -->
+      <div class="card" onclick="openModal('trabalho')">
+        <div class="card-glass">
+          <div class="card-icon">💼</div>
+          <h2>Trabalho</h2>
+          <p>Projetos, metas diárias, reuniões e gestão de tarefas prioritárias.</p>
+          <div class="card-actions">
+            <span class="btn-detail">Ver Resumo</span>
+            <a href="trabalho.html" class="btn-link" onclick="event.stopPropagation()">Acessar Página ➔</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Lazer -->
+      <div class="card" onclick="openModal('lazer')">
+        <div class="card-glass">
+          <div class="card-icon">🌷</div>
+          <h2>Lazer</h2>
+          <p>Descanso, hobbies, autocuidado e momentos de relaxamento.</p>
+          <div class="card-actions">
+            <span class="btn-detail">Ver Resumo</span>
+            <a href="lazer.html" class="btn-link" onclick="event.stopPropagation()">Acessar Página ➔</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Auxílio na Igreja -->
+      <div class="card" onclick="openModal('igreja')">
+        <div class="card-glass">
+          <div class="card-icon">⛪</div>
+          <h2>Auxílio na Igreja</h2>
+          <p>Escalas de voluntariado, ministérios, eventos e dedicação espiritual.</p>
+          <div class="card-actions">
+            <span class="btn-detail">Ver Resumo</span>
+            <a href="igreja.html" class="btn-link" onclick="event.stopPropagation()">Acessar Página ➔</a>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Estrutura do Modal -->
+  <div class="modal-overlay" id="routineModal" onclick="closeModal(event)">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModalDirect()">&times;</span>
+      <h2 id="modalTitle">Título da Rotina</h2>
+      <div id="modalBody">
+        <!-- Conteúdo dinâmico via JS -->
+      </div>
+      <div class="modal-footer">
+        <a id="modalPageLink" href="#" class="btn-main">Ir para página completa ➔</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Embutido -->
+  <script>
+    // Dados para o Modal
+    const routineData = {
+      estudo: {
+        title: "📚 Rotina de Estudos",
+        content: `
+          <ul>
+            <li><strong>Bloco Matutino:</strong> Leitura teórica e resumos (08h - 10h).</li>
+            <li><strong>Bloco Vespertino:</strong> Resolução de exercícios e revisão espaçada.</li>
+            <li><strong>Metas da Semana:</strong> Concluir 3 tópicos prioritários e revisar anotações.</li>
+          </ul>
+        `,
+        link: "estudo.html"
+      },
+      trabalho: {
+        title: "💼 Rotina de Trabalho",
+        content: `
+          <ul>
+            <li><strong>Check-in diário:</strong> Organizar e-mails e definir a lista de prioridades (TO-DO).</li>
+            <li><strong>Foco Total:</strong> Execução dos projetos principais no período da tarde.</li>
+            <li><strong>Alinhamentos:</strong> Acompanhamento de entregas e reuniões com a equipe.</li>
+          </ul>
+        `,
+        link: "trabalho.html"
+      },
+      lazer: {
+        title: "🌷 Rotina de Lazer",
+        content: `
+          <ul>
+            <li><strong>Momentos de Pausa:</strong> Caminhadas ao ar livre e leitura por prazer.</li>
+            <li><strong>Autocuidado:</strong> Cuidados pessoais aos finais de tarde.</li>
+            <li><strong>Tempo de Qualidade:</strong> Encontros com amigos e momentos de desconexão.</li>
+          </ul>
+        `,
+        link: "lazer.html"
+      },
+      igreja: {
+        title: "⛪ Auxílio na Igreja",
+        content: `
+          <ul>
+            <li><strong>Escalas:</strong> Organização de presença nos cultos e eventos.</li>
+            <li><strong>Ministério:</strong> Planejamento e suporte nas atividades de voluntariado.</li>
+            <li><strong>Oração & Devocional:</strong> Tempo diário dedicado à leitura bíblica e oração.</li>
+          </ul>
+        `,
+        link: "igreja.html"
+      }
+    };
+
+    // Função de Abrir Modal
+    function openModal(key) {
+      const data = routineData[key];
+      if (!data) return;
+
+      document.getElementById('modalTitle').innerText = data.title;
+      document.getElementById('modalBody').innerHTML = data.content;
+      document.getElementById('modalPageLink').setAttribute('href', data.link);
+
+      const modal = document.getElementById('routineModal');
+      modal.classList.add('active');
+    }
+
+    // Funções de Fechar Modal
+    function closeModal(event) {
+      if (event.target.id === 'routineModal') {
+        document.getElementById('routineModal').classList.remove('active');
+      }
+    }
+
+    function closeModalDirect() {
+      document.getElementById('routineModal').classList.remove('active');
+    }
+
+    // Geração Dinâmica dos Objetos 3D Voando no Fundo (Estrelas e Glitter)
+    function createFloatingElements() {
+      const container = document.getElementById('bgContainer');
+      const count = 35; // Quantidade de elementos flutuantes
+
+      for (let i = 0; i < count; i++) {
+        const item = document.createElement('div');
+        const isStar = Math.random() > 0.4;
+        item.className = isStar ? 'floating-obj star' : 'floating-obj glitter';
+
+        // Posição inicial aleatória
+        item.style.left = Math.random() * 100 + 'vw';
+        item.style.top = Math.random() * 100 + 'vh';
+
+        // Tamanhos e profundidade 3D (Z-translation e variação de escala)
+        const size = Math.random() * 18 + 8;
+        item.style.width = size + 'px';
+        item.style.height = size + 'px';
+
+        // Tempos de animação aleatórios
+        const duration = Math.random() * 10 + 6;
+        const delay = Math.random() * 5;
+        item.style.animationDuration = duration + 's';
+        item.style.animationDelay = delay + 's';
+
+        container.appendChild(item);
+      }
+    }
+
+    // Inicializar elementos ao carregar a página
+    window.addEventListener('DOMContentLoaded', createFloatingElements);
+  </script>
+</body>
+</html>
